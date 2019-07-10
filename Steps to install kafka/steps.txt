@@ -1,0 +1,59 @@
+step-1]Environment Variables -> User Variables-> New-> Variable-name:KAFKA_HOME and  Variable-value:C:\Users\sashetye\software\kafka_2.10-0.9.0.1
+Environment Variables -> User Variables-> New->Variable-name:ZOOKEEPER_HOME and  Variable-value:C:\Users\sashetye\software\zookeeper-3.4.8
+
+step-2]Path->Edit->%KAFKA_HOME%\bin ->ok
+Path->Edit->%ZOOKEEPER_HOME%\bin ->ok
+
+step-3]create zookeeper_data and logs folder inside kafka_2.10-0.9.0.1
+
+step-4]Do respective changes in zookeeper.properties and sever.properties files inside kafka_2.10-0.9.0.1->config
+
+(i)In zookeeper.properties-: dataDir=C:/Users/sashetye/software/kafka_2.10-0.9.0.1/zookeeper_data
+
+(ii)In server.properties-: 	log.dirs=C:/Users/sashetye/software/kafka_2.10-0.9.0.1/logs 
+and cooment this line listeners=PLAINTEXT://:9092 ie. with # so #listeners=PLAINTEXT://:9092
+
+step-4]Do respective changes in zoo.cfg inside zookeeper-3.4.8->conf
+In zoo.cfg-:	dataDir=C:\Users\sashetye\software\zookeeper-3.4.8\data
+
+
+
+On cmd-:
+
+1]To start zookeeper-
+
+C:\Users\sashetye\software\kafka_2.10-0.9.0.1>zkserver
+
+or
+goto kafka_2.12-2.2.1 and open cmd here and do commands from bin as follows-
+
+C:\Users\sashetye\software\kafka_2.12-2.2.1>bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+
+2]To start kafka server-
+
+C:\Users\sashetye\software\kafka_2.12-2.2.1>bin\windows\kafka-server-start.bat config\server.properties
+
+
+3]To create topic-
+
+C:\Users\sashetye\software\kafka_2.12-2.2.1>bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+Created topic test.
+
+4]To create producer-
+
+C:\Users\sashetye\software\kafka_2.12-2.2.1>bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic test
+>hello
+>hi
+>ddd
+>ddd
+>
+
+
+5]To create consumer-
+
+C:\Users\sashetye\software\kafka_2.12-2.2.1>bin\windows\kafka-console-consumer.bat -bootstrap-server localhost:9092 -topic test -from-beginning
+hello
+hi
+ddd
+ddd
